@@ -1,0 +1,759 @@
+/* ============================================================
+   Dark Citrussy · 个人美化层
+   base  : Blue Topaz (WhyI & Pkmer) —— 本文件上方全部内容
+   layer : 下列各段，来自作者自用的 8 个 CSS 片段，已做清理
+   order : Tweaks → List → Heading → IndentGuide → Callout
+           → ListGap → HideFolders → CodeBlock（与原片段加载顺序一致）
+   ============================================================ */
+
+/* ============================================================
+   Tweaks · 斜体转正 / 转义符 / 标签胶囊 / 当前行底纹
+   ============================================================ */
+
+/* 杂项 · 斜体转正 / 转义符跟随正文 / 标签胶囊 / 光标对齐
+   合并了原 NoItalic / EscapeChar / Tag / CursorAlign */
+
+/* ---------- 取消斜体：*斜体* 显示成正体，颜色跟随 H6 绿 ---------- */
+.markdown-rendered em,
+.markdown-preview-view em,
+.cm-s-obsidian span.cm-em:not(.cm-formatting-em) {
+    font-style: normal !important;
+    color: var(--lb-6, #7ee787) !important;
+}
+
+/* ---------- 转义符不被染灰 ---------- */
+.cm-s-obsidian span.cm-hmd-escape-char,
+.cm-s-obsidian span.cm-hmd-escape-backslash {
+    color: inherit !important;
+}
+
+/* ---------- 标签：小圆角胶囊，跟随强调色 ---------- */
+body {
+    --tag-size: .82em;
+    --tag-padding-x: .55em;
+    --tag-padding-y: .12em;
+    --tag-radius: 6px;
+    --tag-border-width: 1px;
+    --tag-border-color: color-mix(in srgb, var(--interactive-accent) 30%, transparent);
+    --tag-border-color-hover: color-mix(in srgb, var(--interactive-accent) 45%, transparent);
+    --tag-background: color-mix(in srgb, var(--interactive-accent) 10%, transparent);
+    --tag-background-hover: color-mix(in srgb, var(--interactive-accent) 20%, transparent);
+    --tag-color: var(--text-accent);
+    --tag-color-hover: var(--text-accent);
+}
+
+/* ---------- 取消光标所在行的蓝色底纹（Blue Topaz 的 --activeline-background） ---------- */
+body.theme-dark,
+body.theme-light {
+    --activeline-background: transparent !important;
+    --code-active-line-background-color: transparent !important;
+}
+
+body .markdown-source-view.mod-cm6 .cm-active.cm-line,
+body .cm-editor .cm-active.cm-line,
+body .cm-activeLine,
+body .cm-activeLineGutter,
+body .CodeMirror-activeline-background.CodeMirror-linebackground {
+    background-color: transparent !important;
+    background-image: none !important;
+    box-shadow: none !important;
+}
+
+/* ============================================================
+   List · 六色圆点 / 复选框 / 已完成任务
+   ============================================================ */
+
+/* 列表 · 六色圆点逐级变小 / 有序数字上色 / 已完成任务变淡
+   缩进引导线见 IndentGuide.css */
+
+/* 六色色板（--lb-N，其它片段可复用） */
+body {
+    /* 六色色板上移到 body：阅读模式也拿得到，不再依赖 fallback */
+    --lb-1: #ff7b72;
+    --lb-2: #ffb454;
+    --lb-3: #79c0ff;
+    --lb-4: #d2a8ff;
+    --lb-5: #56d4dd;
+    --lb-6: #7ee787;
+    --lb-ol: #ff9188;
+}
+
+/* 任务复选框：只影响笔记正文 */
+.markdown-source-view.mod-cm6,
+.markdown-rendered {
+    --checkbox-size: 16px;
+    --checkbox-radius: 4px;
+    --checkbox-color: var(--lb-ol, #ff9188);
+    --checkbox-marker-color: #1a1a1a;
+    --checkbox-border-color: rgba(255, 255, 255, .32);
+}
+
+/* 无序列表：实心圆点 */
+.markdown-source-view.mod-cm6 .list-bullet {
+    position: relative;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+}
+
+/* 兜底：第 6 级及更深 */
+.markdown-source-view.mod-cm6 .list-bullet::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: .24em;
+    height: .24em;
+    border-radius: 50%;
+    background: var(--lb-6);
+    transform: translate(-50%, -50%);
+}
+
+.markdown-source-view.mod-cm6 .HyperMD-list-line-1 .list-bullet::after { width: .46em; height: .46em; background: var(--lb-1); }
+.markdown-source-view.mod-cm6 .HyperMD-list-line-2 .list-bullet::after { width: .40em; height: .40em; background: var(--lb-2); }
+.markdown-source-view.mod-cm6 .HyperMD-list-line-3 .list-bullet::after { width: .34em; height: .34em; background: var(--lb-3); }
+.markdown-source-view.mod-cm6 .HyperMD-list-line-4 .list-bullet::after { width: .30em; height: .30em; background: var(--lb-4); }
+.markdown-source-view.mod-cm6 .HyperMD-list-line-5 .list-bullet::after { width: .27em; height: .27em; background: var(--lb-5); }
+
+/* 光标所在行的圆点轻微放大 */
+.markdown-source-view.mod-cm6 .cm-active.HyperMD-list-line .list-bullet::after {
+    transform: translate(-50%, -50%) scale(1.2);
+}
+
+/* 有序列表：只上色加粗 */
+.markdown-source-view.mod-cm6 .cm-formatting-list-ol {
+    color: var(--lb-ol);
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+}
+
+/* 已完成任务 */
+.markdown-source-view.mod-cm6 .HyperMD-task-line:is([data-task="x"], [data-task="X"]):not(.cm-active) {
+    color: var(--text-faint);
+    text-decoration: line-through;
+    text-decoration-color: var(--text-faint);
+    text-decoration-thickness: 1px;
+}
+
+.markdown-source-view.mod-cm6 .HyperMD-task-line:is([data-task="x"], [data-task="X"]):not(.cm-active) .task-list-item-checkbox {
+    opacity: .55;
+}
+
+/* 无序列表整体左移 1px */
+.markdown-source-view.mod-cm6 .HyperMD-list-line:has(.cm-formatting-list-ul) {
+    margin-inline-start: -1px;
+}
+
+/* ============================================================
+   Heading · 六级标题字号与配色
+   ============================================================ */
+
+/* 标题 · 字号阶梯每级 -0.21em（笔记标题 2.34 → H6 1.08），六色配色，上留白收紧 */
+
+body {
+    --lb-h1-size: 2.13em;
+    --lb-h-step: .21em;
+    --lb-title-size: calc(var(--lb-h1-size) + var(--lb-h-step));
+    --lb-h-gap: .1rem;
+    --lb-h-pull: -1.5rem;
+}
+
+/* ---------- 笔记标题 ---------- */
+.inline-title,
+.markdown-source-view.mod-cm6 .inline-title,
+.markdown-preview-view .inline-title {
+    font-size: var(--lb-title-size);
+    line-height: 1.15;
+}
+
+/* ---------- H1 ---------- */
+.markdown-source-view.mod-cm6 .HyperMD-header-1,
+.markdown-rendered h1 {
+    font-size: var(--lb-h1-size);
+    font-weight: 700;
+    line-height: 1.15;
+}
+
+.markdown-source-view.mod-cm6 :is(.HyperMD-header-1, .cm-header-1),
+.markdown-rendered h1 {
+    color: var(--lb-1, #ff7b72);
+}
+
+/* ---------- H2 ---------- */
+.markdown-source-view.mod-cm6 .HyperMD-header-2,
+.markdown-rendered h2 {
+    font-size: calc(var(--lb-h1-size) - var(--lb-h-step));
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.markdown-source-view.mod-cm6 :is(.HyperMD-header-2, .cm-header-2),
+.markdown-rendered h2 {
+    color: var(--lb-2, #ffb454);
+}
+
+/* ---------- H3 ---------- */
+.markdown-source-view.mod-cm6 .HyperMD-header-3,
+.markdown-rendered h3 {
+    font-size: calc(var(--lb-h1-size) - 2 * var(--lb-h-step));
+    font-weight: 600;
+    line-height: 1.25;
+}
+
+.markdown-source-view.mod-cm6 :is(.HyperMD-header-3, .cm-header-3),
+.markdown-rendered h3 {
+    color: var(--lb-3, #79c0ff);
+}
+
+/* ---------- H4 ---------- */
+.markdown-source-view.mod-cm6 .HyperMD-header-4,
+.markdown-rendered h4 {
+    font-size: calc(var(--lb-h1-size) - 3 * var(--lb-h-step));
+    font-weight: 600;
+    line-height: 1.3;
+}
+
+.markdown-source-view.mod-cm6 :is(.HyperMD-header-4, .cm-header-4),
+.markdown-rendered h4 {
+    color: var(--lb-4, #d2a8ff);
+}
+
+/* ---------- H5 ---------- */
+.markdown-source-view.mod-cm6 .HyperMD-header-5,
+.markdown-rendered h5 {
+    font-size: calc(var(--lb-h1-size) - 4 * var(--lb-h-step));
+    font-weight: 600;
+    line-height: 1.3;
+}
+
+.markdown-source-view.mod-cm6 :is(.HyperMD-header-5, .cm-header-5),
+.markdown-rendered h5 {
+    color: var(--lb-5, #56d4dd);
+}
+
+/* ---------- H6 ---------- */
+.markdown-source-view.mod-cm6 .HyperMD-header-6,
+.markdown-rendered h6 {
+    font-size: calc(var(--lb-h1-size) - 5 * var(--lb-h-step));
+    font-weight: 500;
+    line-height: 1.3;
+}
+
+.markdown-source-view.mod-cm6 :is(.HyperMD-header-6, .cm-header-6),
+.markdown-rendered h6 {
+    color: var(--lb-6, #7ee787);
+}
+
+/* ---------- 标题前间距收紧 ---------- */
+.markdown-source-view.mod-cm6 .cm-line.HyperMD-header {
+    padding-top: var(--lb-h-gap) !important;
+    padding-bottom: var(--lb-h-gap) !important;
+    /* 大字号会放大中文字形左侧留白，左移 1px 与正文对齐 */
+    margin-inline-start: -1px;
+}
+
+/* 标题前的空行吃掉一部分 */
+.markdown-source-view.mod-cm6 .cm-line:has(> br:only-child) + .cm-line.HyperMD-header {
+    margin-top: var(--lb-h-pull);
+}
+
+/* 阅读模式（Blue Topaz 优先级更高，必须 !important） */
+.markdown-rendered :is(h1, h2, h3, h4, h5, h6) {
+    margin-block-start: var(--lb-h-gap) !important;
+    margin-block-end: var(--lb-h-gap) !important;
+    margin-inline-start: -1px;
+}
+
+/* ============================================================
+   IndentGuide · 缩进引导线
+   ============================================================ */
+
+/* 缩进引导线 · 每级缩进 1.65em，线画在格子正中，行间连续
+   只影响编辑/实时预览；阅读模式列表缩进同步收窄 */
+
+body {
+    /* 原生 = --indent-unit(.5625em) × 4 = 2.25em */
+    --list-indent: 1.65em;
+}
+
+.markdown-source-view.mod-cm6 {
+    --indentation-guide-color: rgba(214, 206, 250, .85);
+    --indentation-guide-color-active: rgba(214, 206, 250, .85);
+    --indentation-guide-width: 1px;
+}
+
+/* 纯缩进行的 tab 宽度统一成格子宽，否则线会被推歪 */
+.markdown-source-view.mod-cm6 .cm-line:not(.HyperMD-codeblock) {
+    tab-size: var(--list-indent);
+}
+
+/* 去掉列表行上内边距，文字回到同一基线（下内边距保留） */
+.markdown-source-view.mod-cm6 .HyperMD-list-line.cm-line {
+    padding-top: 0;
+}
+
+/* 线定位：格子宽 1.65em，一半 0.825em。
+   刻意不给 .cm-indent 设 position: relative，让 ::before 仍以 .cm-line 为容器，
+   top/bottom 撑满整行，上下行的线才能接上。 */
+.markdown-source-view.mod-cm6.is-live-preview .cm-indent::before {
+    margin-inline-start: calc(var(--list-indent) / 2 - 1.5px);
+}
+
+/* 列表符号前的额外缩进也收掉，文字更贴近线条 */
+.markdown-source-view.is-live-preview {
+    --list-indent-editing: 0.55em;
+    --list-marker-space: 0.2em;
+}
+
+/* ============================================================
+   Callout · 公式排版 / 整卡底色
+   ============================================================ */
+
+/* Callout · 公式排版 + 整卡底色 + quote 绿色
+   合并了原 CalloutLatex / CalloutLatexV2 / CalloutUniformBg / QuoteCalloutGreen */
+
+/* 1. 不让卡片裁掉超宽公式 */
+.callout {
+  overflow: visible !important;
+}
+
+.cm-callout:has(.math) {
+  overflow: visible;
+}
+
+/* 2. 块级公式自己横向滚动，别顶破卡片 */
+.callout .math.math-block,
+.cm-callout .math.math-block,
+.markdown-source-view.mod-cm6 .math.math-block,
+.callout .callout-content > .math.math-block,
+.callout .callout-content > mjx-container[display="true"] {
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.callout .math mjx-container,
+.cm-callout .math mjx-container {
+  max-width: 100%;
+}
+
+/* 3. 公式块独占整行（卡片若用 flex 排版） */
+.callout .callout-content > .math.math-block {
+  flex: 1 1 100%;
+  width: 100%;
+}
+
+/* 4. 公式不参与两端对齐 / 自动断词 */
+.callout .callout-content :is(p, li),
+.cm-callout :is(p, li) {
+  text-align: start;
+  hyphens: manual;
+  word-break: normal;
+}
+
+/* 5. 实时预览里的公式源码用正文字体（Blue Topaz 会强刷成等宽代码字体） */
+.markdown-source-view.mod-cm6 span.cm-math:not(.cm-formatting-math-begin):not(.cm-formatting-math-end) {
+  font-family: var(--font-text) !important;
+  font-size: inherit !important;
+}
+
+/* 6. quote / cite 用主题绿色，跟 success 一致 */
+.callout.callout[data-callout="quote"],
+.callout.callout[data-callout="cite"] {
+  --callout-quote: var(--green, #7ee787);
+  --callout-color: var(--green, #7ee787);
+}
+
+/* 7. 整块统一底色：主色 10% 叠加，标题条透明 */
+.callout {
+  background-color: color-mix(in oklch, var(--callout-color) 10%, transparent);
+}
+
+.callout .callout-title {
+  background-color: transparent;
+}
+
+/* ============================================================
+   ListGap · 符号与文字间距
+   ============================================================ */
+
+/* 列表符号↔文字 间距收紧（无序圆点 / 有序数字，实时预览 + 阅读模式）
+   想再紧就把三个数值调大，想还原就调回 0 */
+
+body {
+    --lg-pull: .12em;      /* 实时预览：吃掉符号后面空格的一部分 */
+    --lg-bullet: .15em;    /* 阅读模式：圆点往文字方向挪多少 */
+    --lg-number: .14em;    /* 阅读模式：有序数字后的空隙收多少 */
+}
+
+/* ---------- 实时预览 / 源码模式 ----------
+   符号（-、1.、复选框前）后紧跟的是一个空格字符，给标记元素加负的右外边距，
+   后面的文字就整体左移，符号本身不动。 */
+.markdown-source-view.mod-cm6 .cm-formatting-list {
+    margin-inline-end: calc(var(--lg-pull) * -1);
+}
+
+/* ---------- 阅读模式 · 无序列表 ----------
+   Obsidian 原生让圆点左掠 -0.8em；减小这个负值＝圆点右移、贴近文字。 */
+.markdown-rendered .list-bullet {
+    margin-inline-start: calc(-0.8em + var(--lg-bullet));
+}
+
+/* ---------- 阅读模式 · 有序列表 ----------
+   数字是 ::marker，不能加外边距；只能让首行左移一点，视觉上把空隙收窄。 */
+.markdown-rendered ol > li {
+    text-indent: calc(var(--lg-number) * -1);
+}
+
+/* ============================================================
+   HideFolders · 隐藏 fonts / accessary
+   ============================================================ */
+
+/* 在左侧文件列表里隐藏 fonts / accessary 两个文件夹
+   只藏「显示」，磁盘上的文件夹照旧：附件照进 accessary、local-fonts 照读 fonts */
+
+/* 1.14 的文件树：.tree-item.nav-folder > .nav-folder-title[data-path] */
+.tree-item.nav-folder:has(> .nav-folder-title[data-path="fonts"]),
+.tree-item.nav-folder:has(> .nav-folder-title[data-path="accessary"]) {
+    display: none !important;
+}
+
+/* 兜底：万一标题不是直接子元素，或哪天结构变了，至少把标题行藏掉 */
+.nav-folder-title[data-path="fonts"],
+.nav-folder-title[data-path="accessary"] {
+    display: none !important;
+}
+
+/* ============================================================
+   CodeBlock · Mac 标题栏 + GitHub Dark 配色
+   ============================================================ */
+
+/* 代码块 · Mac 圆点标题栏（容器）+ GitHub Dark 语法配色（文字）
+   合并了原 MacCode / VSCodeCode；配色值取自 github.github-vscode-theme dark-default */
+
+body {
+    /* 容器 */
+    --mac-cb-bg: #21252b;
+    --mac-cb-bar: #1b1f24;
+    --mac-cb-border: rgba(255, 255, 255, .08);
+    --mac-cb-text: #abb2bf;
+    --mac-cb-radius: 10px;
+    --mac-cb-bar-h: 32px;
+    --mac-cb-shadow: 0 8px 20px rgba(0, 0, 0, .28);
+    --mac-dot-red: #ff5f57;
+    --mac-dot-yellow: #febc2e;
+    --mac-dot-green: #28c840;
+    /* 标题栏底图：三个圆点 + 底色（四层，配合 background-size 使用） */
+    --mac-cb-chrome:
+        radial-gradient(circle at 16px 16px, var(--mac-dot-red) 0 5px, transparent 5.5px),
+        radial-gradient(circle at 36px 16px, var(--mac-dot-yellow) 0 5px, transparent 5.5px),
+        radial-gradient(circle at 56px 16px, var(--mac-dot-green) 0 5px, transparent 5.5px),
+        linear-gradient(var(--mac-cb-bar), var(--mac-cb-bar));
+
+    /* 语法配色：取值来自 github.github-vscode-theme 的 dark-default.json
+       （VSCode 里 keyword → storage → annotation 都是 #ff7b72；entity.name.function → #d2a8ff；
+        entity.name → #ffa657；variable.other → 跟随 editor.foreground #e6edf3） */
+    --vc-fg: #e6edf3;         /* editor.foreground */
+    --vc-comment: #8b949e;    /* comment */
+    --vc-keyword: #ff7b72;    /* keyword / storage / 注解 */
+    --vc-string: #a5d6ff;     /* string */
+    --vc-number: #79c0ff;     /* number / constant / support / builtin */
+    --vc-function: #d2a8ff;   /* entity.name.function、装饰器 */
+    --vc-type: #ffa657;       /* entity.name：类名、类型 */
+    --vc-tag: #7ee787;        /* entity.name.tag */
+    --vc-property: #79c0ff;   /* meta.property-name：属性名、字段访问 */
+    --vc-operator: #ff7b72;
+    --vc-punct: #e6edf3;
+    --vc-invalid: #ffa198;
+    --vc-inserted: #7ee787;
+    /* 标识符：VSCode 里普通变量/参数/属性名不吃彩，跟正文字色一致 */
+    --vc-variable: #e6edf3;
+}
+
+/* ---------- 阅读模式：整块卡片 ---------- */
+.markdown-rendered pre,
+.markdown-preview-view pre {
+    background-color: var(--mac-cb-bg) !important;
+    background-image: var(--mac-cb-chrome);
+    background-repeat: no-repeat;
+    background-size: 100% 100%, 100% 100%, 100% 100%, 100% var(--mac-cb-bar-h);
+    border: 1px solid var(--mac-cb-border) !important;
+    border-radius: var(--mac-cb-radius) !important;
+    padding: calc(var(--mac-cb-bar-h) + 8px) 18px 18px !important;
+    margin: 1.2em 0 !important;
+    box-shadow: var(--mac-cb-shadow);
+    font-family: var(--font-monospace);
+    font-size: .88em;
+    line-height: 1.65;
+    color: var(--mac-cb-text) !important;
+    position: relative;
+}
+
+.markdown-rendered pre > code,
+.markdown-preview-view pre > code {
+    position: relative;
+    z-index: 1;
+    padding: 0 !important;
+    background: transparent !important;
+    color: inherit !important;
+    font-size: inherit !important;
+}
+
+/* 复制按钮抬到标题栏上 */
+.markdown-rendered pre > button.copy-code-button,
+.markdown-preview-view pre > button.copy-code-button {
+    z-index: 3;
+    top: 3px;
+    inset-inline-end: 6px;
+    margin: 0;
+    border-radius: 6px;
+    color: color-mix(in srgb, var(--mac-cb-text) 65%, transparent);
+}
+
+.markdown-rendered pre > button.copy-code-button:hover,
+.markdown-preview-view pre > button.copy-code-button:hover {
+    background-color: rgba(255, 255, 255, .09);
+    color: var(--mac-cb-text);
+}
+
+/* callout / 嵌入里的代码块不要叠两层阴影 */
+.callout pre {
+    box-shadow: none;
+}
+
+/* ---------- 实时预览 ---------- */
+body .markdown-source-view.mod-cm6 .cm-line.HyperMD-codeblock-bg {
+    font-family: var(--font-monospace);
+    font-size: .88em;
+    color: var(--mac-cb-text);
+}
+
+body .markdown-source-view.mod-cm6 .cm-line.HyperMD-codeblock-bg,
+body .markdown-source-view.cm-s-obsidian.mod-cm6 .cm-line.HyperMD-codeblock-bg.cm-active {
+    background-color: var(--mac-cb-bg) !important;
+    z-index: auto !important;
+}
+
+/* 首行：上圆角 + 标题栏 */
+.markdown-source-view.mod-cm6 .cm-line.HyperMD-codeblock-begin {
+    padding-top: calc(var(--mac-cb-bar-h) + 8px) !important;
+    border: 1px solid var(--mac-cb-border);
+    border-bottom: none;
+    border-radius: var(--mac-cb-radius) var(--mac-cb-radius) 0 0;
+    background-color: var(--mac-cb-bg) !important;
+    background-image: var(--mac-cb-chrome);
+    background-repeat: no-repeat;
+    background-size: 100% 100%, 100% 100%, 100% 100%, 100% var(--mac-cb-bar-h);
+    box-shadow: var(--mac-cb-shadow);
+    position: relative;
+}
+
+/* 中间行：左右描边 */
+.markdown-source-view.mod-cm6 .cm-line.HyperMD-codeblock-bg:not(.HyperMD-codeblock-begin):not(.HyperMD-codeblock-end) {
+    border-left: 1px solid var(--mac-cb-border);
+    border-right: 1px solid var(--mac-cb-border);
+}
+
+/* 尾行：下圆角 */
+.markdown-source-view.mod-cm6 .cm-line.HyperMD-codeblock-end {
+    padding-bottom: 12px !important;
+    border: 1px solid var(--mac-cb-border);
+    border-top: none;
+    border-radius: 0 0 var(--mac-cb-radius) var(--mac-cb-radius);
+    background-color: var(--mac-cb-bg) !important;
+}
+
+/* 语言标签：收进标题栏右侧 */
+body .markdown-source-view.mod-cm6 .code-block-flair {
+    top: 5px;
+    right: 10px;
+    height: 20px;
+    padding: 0 6px;
+    line-height: 20px;
+    border-radius: 6px;
+    font-family: var(--font-interface);
+    font-size: 11px;
+    color: color-mix(in srgb, var(--mac-cb-text) 60%, transparent);
+}
+
+/* ---------- 打印 / 导出 PDF ---------- */
+@media print {
+    .markdown-rendered pre {
+        print-color-adjust: exact;
+        -webkit-print-color-adjust: exact;
+        box-shadow: none;
+        break-inside: avoid;
+    }
+}
+
+/* ================= 语法配色：正文字色 ================= */
+body .markdown-rendered pre,
+body .markdown-preview-view pre {
+    color: var(--vc-fg) !important;
+}
+
+html body .markdown-source-view.mod-cm6 .cm-line[class*="HyperMD-codeblock"] {
+    color: var(--vc-fg) !important;
+}
+
+/* ================= 阅读模式 · Prism token ================= */
+body .markdown-rendered pre .token.comment,
+body .markdown-rendered pre .token.prolog,
+body .markdown-rendered pre .token.doctype,
+body .markdown-rendered pre .token.cdata {
+    color: var(--vc-comment) !important;
+}
+
+body .markdown-rendered pre .token.keyword,
+body .markdown-rendered pre .token.atrule,
+body .markdown-rendered pre .token.rule,
+body .markdown-rendered pre .token.directive,
+body .markdown-rendered pre .token.annotation {
+    color: var(--vc-keyword) !important;
+}
+
+body .markdown-rendered pre .token.string,
+body .markdown-rendered pre .token.char,
+body .markdown-rendered pre .token.attr-value,
+body .markdown-rendered pre .token.regex,
+body .markdown-rendered pre .token.template-string,
+body .markdown-rendered pre .token.url {
+    color: var(--vc-string) !important;
+}
+
+body .markdown-rendered pre .token.number,
+body .markdown-rendered pre .token.boolean,
+body .markdown-rendered pre .token.constant,
+body .markdown-rendered pre .token.symbol,
+body .markdown-rendered pre .token.builtin,
+body .markdown-rendered pre .token.namespace,
+body .markdown-rendered pre .token.entity {
+    color: var(--vc-number) !important;
+}
+
+body .markdown-rendered pre .token.function,
+body .markdown-rendered pre .token.method,
+body .markdown-rendered pre .token.function-variable,
+body .markdown-rendered pre .token.macro {
+    color: var(--vc-function) !important;
+}
+
+body .markdown-rendered pre .token.class-name,
+body .markdown-rendered pre .token.selector,
+body .markdown-rendered pre .token.maybe-class-name {
+    color: var(--vc-type) !important;
+}
+
+/* 标识符：普通变量、参数、HTML 属性名、JS 对象字面量的键 */
+body .markdown-rendered pre .token.variable,
+body .markdown-rendered pre .token.parameter,
+body .markdown-rendered pre .token.attr-name,
+body .markdown-rendered pre .token.literal-property,
+body .markdown-rendered pre .token.label {
+    color: var(--vc-variable) !important;
+}
+
+/* 装饰器放在注解之后：Prism 的 python 装饰器同时带 decorator + annotation 两个类 */
+body .markdown-rendered pre .token.decorator {
+    color: var(--vc-function) !important;
+}
+
+body .markdown-rendered pre .token.tag {
+    color: var(--vc-tag) !important;
+}
+
+body .markdown-rendered pre .token.property,
+body .markdown-rendered pre .token.property-access {
+    color: var(--vc-property) !important;
+}
+
+body .markdown-rendered pre .token.operator {
+    color: var(--vc-operator) !important;
+}
+
+body .markdown-rendered pre .token.punctuation {
+    color: var(--vc-punct) !important;
+}
+
+body .markdown-rendered pre .token.important {
+    color: var(--vc-keyword) !important;
+    font-weight: 600;
+}
+
+body .markdown-rendered pre .token.inserted {
+    color: var(--vc-inserted) !important;
+}
+
+body .markdown-rendered pre .token.deleted,
+body .markdown-rendered pre .token.invalid {
+    color: var(--vc-invalid) !important;
+}
+
+
+/* ================= 实时预览 · CodeMirror 语法配色 ================= */
+body .markdown-source-view.mod-cm6 .cm-line.HyperMD-codeblock .cm-comment {
+    color: var(--vc-comment) !important;
+}
+
+body .markdown-source-view.mod-cm6 .cm-line.HyperMD-codeblock .cm-keyword,
+body .markdown-source-view.mod-cm6 .cm-line.HyperMD-codeblock .cm-meta {
+    color: var(--vc-keyword) !important;
+}
+
+body .markdown-source-view.mod-cm6 .cm-line.HyperMD-codeblock .cm-atom,
+body .markdown-source-view.mod-cm6 .cm-line.HyperMD-codeblock .cm-number {
+    color: var(--vc-number) !important;
+}
+
+body .markdown-source-view.mod-cm6 .cm-line.HyperMD-codeblock .cm-def {
+    color: var(--vc-function) !important;
+}
+
+body .markdown-source-view.mod-cm6 .cm-line.HyperMD-codeblock .cm-variable {
+    color: var(--vc-variable) !important;
+}
+
+body .markdown-source-view.mod-cm6 .cm-line.HyperMD-codeblock .cm-variable-2 {
+    color: var(--vc-property) !important;
+}
+
+body .markdown-source-view.mod-cm6 .cm-line.HyperMD-codeblock .cm-variable-3,
+body .markdown-source-view.mod-cm6 .cm-line.HyperMD-codeblock .cm-type,
+body .markdown-source-view.mod-cm6 .cm-line.HyperMD-codeblock .cm-qualifier {
+    color: var(--vc-type) !important;
+}
+
+body .markdown-source-view.mod-cm6 .cm-line.HyperMD-codeblock .cm-property,
+body .markdown-source-view.mod-cm6 .cm-line.HyperMD-codeblock .cm-builtin {
+    color: var(--vc-property) !important;
+}
+
+body .markdown-source-view.mod-cm6 .cm-line.HyperMD-codeblock .cm-attribute {
+    color: var(--vc-variable) !important;
+}
+
+body .markdown-source-view.mod-cm6 .cm-line.HyperMD-codeblock .cm-string,
+body .markdown-source-view.mod-cm6 .cm-line.HyperMD-codeblock .cm-string-2 {
+    color: var(--vc-string) !important;
+}
+
+body .markdown-source-view.mod-cm6 .cm-line.HyperMD-codeblock .cm-tag {
+    color: var(--vc-tag) !important;
+}
+
+body .markdown-source-view.mod-cm6 .cm-line.HyperMD-codeblock .cm-operator {
+    color: var(--vc-operator) !important;
+}
+
+body .markdown-source-view.mod-cm6 .cm-line.HyperMD-codeblock .cm-bracket,
+body .markdown-source-view.mod-cm6 .cm-line.HyperMD-codeblock .cm-punctuation {
+    color: var(--vc-punct) !important;
+}
+
+body .markdown-source-view.mod-cm6 .cm-line.HyperMD-codeblock .cm-link {
+    color: var(--vc-string) !important;
+}
+
+body .markdown-source-view.mod-cm6 .cm-line.HyperMD-codeblock .cm-error {
+    color: var(--vc-invalid) !important;
+}
