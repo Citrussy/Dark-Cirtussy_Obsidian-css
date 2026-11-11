@@ -4,6 +4,8 @@
 
 覆盖层原本是 8 个 CSS 片段，放在 `.obsidian/snippets/` 里。片段跟着库走，换设备、换主题都要重开一遍；合成主题后只选一次主题，不用再管片段开关。
 
+![Dark Citrussy](screenshot.png)
+
 ## 覆盖内容
 
 | 区域 | Blue Topaz 默认 | 本主题 |

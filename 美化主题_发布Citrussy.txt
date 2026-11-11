@@ -68,3 +68,25 @@ README.md —— 美化索引：8 段的行号区间 + 18 个常用旋钮的行�
 
 【状态】
 已推送 https://github.com/Citrussy/my-obsidian-setup
+
+
+-----03-----
+2026-11-11 README 重写 + 仓库改成可提交的形状
+
+【为什么要改结构】
+社区主题库（community.obsidian.md）只认仓库根目录的 theme.css + manifest.json + README.md + LICENSE + screenshot.png。
+原来是 themes/Dark Citrussy/ 套一层，提交会被自动审查打回。
+
+【做了什么】
+1. theme.css、manifest.json 从 themes/Dark Citrussy/ 移到仓库根，themes/ 目录删除（git 认成 100% rename）
+2. 新增 LICENSE：MIT（Copyright 2026 Citrussy），末尾注明基座 Blue Topaz 也是 MIT（Copyright 2020 WhyI & Pkmer）
+3. README 重写：三段式（覆盖内容表 / 结构 + 行号表 / 常用变量 + 工作流 + 约定 + 限制 + 安装 + 许可），删掉原来的"两条改法""规矩"等重复段落，行数 190 → 100
+4. 库里的 themes/Dark Citrussy/README.md 同步覆盖
+
+【提交状态】7a889f3 已推 origin/main。仓库当前根目录 7 个文件。
+
+【上架社区还缺】
+1. screenshot.png，512×288，放仓库根。没有它自动审查过不了。
+2. GitHub release：tag 写 1.0.0（与 manifest 完全一致，别加 v 前缀），附件传 manifest.json + theme.css（Obsidian 从这个 release 下载安装）。
+3. community.obsidian.md 登录 Obsidian 账号 → 关联 GitHub → 目录里提交该仓库。
+三件事都需要账号操作。gh CLI 没装，release 只能走网页或 API（API 需要 token）。
