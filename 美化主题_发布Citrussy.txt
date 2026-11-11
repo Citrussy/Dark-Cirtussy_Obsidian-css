@@ -1,4 +1,4 @@
-﻿项目：美化主题_发布Citrussy
+项目：美化主题_发布Citrussy
 日期：2026-11-11
 
 【为什么做】
@@ -9,3 +9,42 @@
 
 【改了什么】
 *新增* 项目骨架（同名说明）
+
+-----01-----
+2026-11-11 主题打包
+
+【成品】
+- themes/Dark Citrussy/theme.css —— 1,351,730 字节 = Blue Topaz 原样 1,325,643 + 个人层 26,087
+- themes/Dark Citrussy/manifest.json —— name 必须是 Dark Citrussy，和文件夹同名
+- overrides.css —— 个人层单独留一份，Blue Topaz 升级时拿它重拼
+
+【怎么拼的】
+Blue Topaz 的 theme.css 一字未改放在最前，8 个片段按 appearance.json 里的加载顺序接在后面：
+Tweaks → List → Heading → IndentGuide → Callout → ListGap → HideFolders → CodeBlock。
+这个顺序不能调：body 上互相覆盖的 --tag-size / --checkbox-size / --list-indent / --lg-* 依赖它。
+
+【改了什么（相对原片段）】
+1. 删 .cm-cursor 规则——Obsidian 1.14 是原生光标，选择器已无对象，光标由 cursor-jump 插件画
+2. 删 .token.sql-keyword / sql-function / sql-type——依赖没装的 php-sql-highlight
+3. --lb-1..6、--lb-ol 从 .markdown-source-view.mod-cm6 上移到 body，阅读模式直接用同一套色板
+4. var(--color-green) → var(--green, #7ee787)：Blue Topaz 从没定义 --color-green，原规则一直是失效的
+5. !important 70 → 66，其余全部保留：这些是在跟 Blue Topaz 抢同一批属性，删了就退回主题默认样式
+
+【装法】
+1. 把 themes/Dark Citrussy 整个放进 D:\Obsidian\.obsidian\themes\
+2. 设置 → 外观 → 主题选 Dark Citrussy
+3. 关掉原来那 8 个 CSS 片段，否则同一批规则跑两遍（画面不变，只是浪费）
+回滚：主题切回 Blue Topaz，8 个片段重新打开。
+
+【Blue Topaz 升级时】
+主题自身更新不会碰 Dark Citrussy 文件夹，不会互相覆盖。要跟新版时按下面重拼一次：
+  cat "Blue Topaz/theme.css" overrides.css > "Dark Citrussy/theme.css"
+
+【还没做】
+推送到 https://github.com/Citrussy/my-obsidian-setup。本机没有 GitHub 凭证：credential.helper=manager 但 GCM 没装，git push 卡在要用户名。
+本地已 init 并提交 a8ac2c4，origin 已加，http.proxy=127.0.0.1:7897（直连 443 不通，走代理能连上）。
+
+【风险】
+- 代码块 #21252b、六色板、紫引导线是写死的暗色，theme:system 切到浅色不跟随，但也不难看
+- HideFolders 那段会隐藏任何叫 fonts / accessary 的文件夹，发给别人属于个人噪音
+- 主题 1.35MB，Obsidian 能读，只是首次加载多几十毫秒
