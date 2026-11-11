@@ -48,3 +48,23 @@ https://github.com/Citrussy/my-obsidian-setup （branch main，首提交 a8ac2c4
 - 代码块 #21252b、六色板、紫引导线是写死的暗色，theme:system 切到浅色不跟随，但也不难看
 - HideFolders 那段会隐藏任何叫 fonts / accessary 的文件夹，发给别人属于个人噪音
 - 主题 1.35MB，Obsidian 能读，只是首次加载多几十毫秒
+
+-----02-----
+2026-11-11 装进库 + 删掉旧片段 + 写索引
+
+【核对】
+8 个片段 107 条规则逐条比对：103 条原样进了主题，少掉的 4 条是计划内（.cm-cursor 1 条、.token.sql-* 3 条）。
+改写的 2 条（body 色板、quote 的 green 变量）在 overrides.css 里能对上。
+
+【动了库里的东西】（备份 %TEMP%\AgentProjects_备份\ObsidianSnippets-<时间>）
+1. themes/Dark Citrussy/ 装进 D:\Obsidian\.obsidian\themes\
+2. appearance.json：cssTheme 改成 Dark Citrussy，enabledCssSnippets 清空
+3. snippets 下 8 个 .css 文件删除（Blue Topaz 等 5 个旧主题没动）
+回滚：主题切回 Blue Topaz，把备份里的 snippets 和 appearance.json 放回去。
+
+【新增】
+README.md —— 美化索引：8 段的行号区间 + 18 个常用旋钮的行号 + 重拼命令。
+改东西先看它，别从头读 1.3MB。
+
+【状态】
+已推送 https://github.com/Citrussy/my-obsidian-setup
