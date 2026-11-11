@@ -92,7 +92,9 @@ Obsidian 里 `Ctrl+P` → `Reload app without saving`。直接改 `theme.css` �
 
 ## 安装
 
-把 `theme.css` 和 `manifest.json` 放进 `.obsidian/themes/Dark Citrussy/`，在「设置 → 外观 → 主题」里选中。
+从 [Releases](https://github.com/Citrussy/my-obsidian-setup/releases/latest) 下载 `theme.css` 和 `manifest.json`，放进 `.obsidian/themes/Dark Citrussy/`，在「设置 → 外观 → 主题」里选中。
+
+尚未提交到社区主题库，暂时只能手动安装。
 
 ## 许可
 
