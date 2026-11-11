@@ -40,9 +40,9 @@ Tweaks → List → Heading → IndentGuide → Callout → ListGap → HideFold
 主题自身更新不会碰 Dark Citrussy 文件夹，不会互相覆盖。要跟新版时按下面重拼一次：
   cat "Blue Topaz/theme.css" overrides.css > "Dark Citrussy/theme.css"
 
-【还没做】
-推送到 https://github.com/Citrussy/my-obsidian-setup。本机没有 GitHub 凭证：credential.helper=manager 但 GCM 没装，git push 卡在要用户名。
-本地已 init 并提交 a8ac2c4，origin 已加，http.proxy=127.0.0.1:7897（直连 443 不通，走代理能连上）。
+【已发布】
+https://github.com/Citrussy/my-obsidian-setup （branch main，首提交 a8ac2c4）
+本机直连 443 不通，走 http.proxy=127.0.0.1:7897 代理推的；凭证走 Windows 凭据管理器，没存明文。
 
 【风险】
 - 代码块 #21252b、六色板、紫引导线是写死的暗色，theme:system 切到浅色不跟随，但也不难看
