@@ -1,8 +1,14 @@
 # Dark Citrussy
 
-基于 [Blue Topaz](https://github.com/PKM-er/Blue-Topaz_Obsidian-css) 的 Obsidian 主题。`theme.css` 由两段拼成：Blue Topaz 原文（1,325,643 字节，逐字节未改）在前，个人覆盖层（26,087 字节）在后。
+## English
 
-覆盖层原本是 8 个 CSS 片段，放在 `.obsidian/snippets/` 里。片段跟着库走，换设备、换主题都要重开一遍；合成主题后只选一次主题，不用再管片段开关。
+Dark Citrussy is an Obsidian theme built on [Blue Topaz](https://github.com/PKM-er/Blue-Topaz_Obsidian-css). `theme.css` has two parts: the Blue Topaz stylesheet first, then a personal override layer of about 26 KB.
+
+The override layer started as eight CSS snippets in `.obsidian/snippets/`. Snippets travel with the vault and must be re-enabled on every device and after every theme switch. Merged into a theme, you pick it once.
+
+What changes: italics render upright in the H6 green, escape characters keep the body color, tags become pills, the active line loses its highlight, list bullets use six colors, checkboxes are 16px, completed tasks are dimmed, headings follow a six-color ladder (H1 at 2.13em, −0.21em per level, note title at 2.34em), lists indent 1.65em with purple guide lines, callouts are tinted 10% with the callout color, block formulas scroll horizontally instead of overflowing, and code blocks get a macOS title bar with GitHub Dark syntax colors.
+
+Requires Obsidian 1.13 or newer. Dark mode only; the palette is tuned for the dark scheme.
 
 ![Dark Citrussy](screenshot.png)
 
@@ -49,7 +55,7 @@
 
 ## 常用变量
 
-行号对应 1.0.0。
+行号对应 1.0.1。
 
 | 目标 | 行 | 变量或规则 |
 | --- | --- | --- |
@@ -80,13 +86,13 @@ Obsidian 里 `Ctrl+P` → `Reload app without saving`。直接改 `theme.css` �
 
 ## 维护约定
 
-- 1–31,190 行是 Blue Topaz 原文。主题升级时整段替换，不在里面改。
+- 1–31,190 行是 Blue Topaz 原文，只修过一处引号笔误（第 26,744 行 `content: '\A\9\9'';` 改回单引号）。主题升级时整段替换，其余不在里面改。
 - 段落顺序固定。`--tag-size`、`--checkbox-size`、`--list-indent`、`--lg-*` 都挂在 `body` 上，靠后面的段落覆盖前面的，顺序变了结果就变。
 - 个人层的 `!important` 用于压过 Blue Topaz 的同名属性，删掉会退回主题默认样式。
 
 ## 已知限制
 
-- 代码块 `#21252b`、六色标题、紫色引导线是固定值，系统切浅色时不跟随。主题声明 `theme: system` 时浅色模式仍可用，只是颜色不协调。
+- 代码块 `#21252b`、六色标题、紫色引导线是固定值，系统切浅色时不跟随。主题按暗色调，未声明浅色支持。
 - 隐藏文件夹的规则针对 `fonts` 和 `accessary` 两个路径，别人装了只对同名文件夹生效。
 - 依赖基座变量 `--activeline-background`、`--list-indent`、`--callout-color`，换基座会失效。
 

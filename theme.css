@@ -26741,7 +26741,7 @@ body.theme-dark .popover.hover-popover:not(.is-loaded) {
     display:unset;
   }
   body.text-indentation-two-em .print *:not(blockquote) > p>br::after {
-    content: '\A\9\9'';
+    content: '\A\9\9';
   }
   body.justify-align .print *:not(blockquote) > p {
     text-align: justify;
