@@ -25486,7 +25486,7 @@ body:not(.default-loading-page).theme-dark .progress-bar {
 body:not(.default-loading-page).loading-animation-cat .progress-bar-message::before {
   content: "GIF creator: Jake Fleming";
   display: block;
-  background: url(https://cdn.dribbble.com/users/53712/screenshots/9948351/media/2397850c7727f8e70b0ec50b5a83fe76.gif) no-repeat center/cover;
+  background: none;
   width: 800px;
   height: 500px;
   margin-top: -20px;

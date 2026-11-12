@@ -57,7 +57,7 @@ Requires Obsidian 1.13 or newer. Dark mode only; the palette is tuned for the da
 
 ## 常用变量
 
-行号对应 1.0.1。
+行号对应 1.0.3。
 
 | 目标 | 行 | 变量或规则 |
 | --- | --- | --- |
@@ -88,7 +88,7 @@ Obsidian 里 `Ctrl+P` → `Reload app without saving`。直接改 `theme.css` �
 
 ## 维护约定
 
-- 1–31,190 行是 Blue Topaz 原文，只修过一处引号笔误（第 26,744 行 `content: '\A\9\9'';` 改回单引号）。主题升级时整段替换，其余不在里面改。
+- 1–31,190 行是 Blue Topaz 原文，只改过两处：第 26,744 行 `content: '\A\9\9'';` 改回单引号；第 25,489 行 `background: url(https://cdn.dribbble.com/...gif)` 改成 `background: none;`（主题不允许外链图片）。主题升级时整段替换，其余不在里面改。
 - 段落顺序固定。`--tag-size`、`--checkbox-size`、`--list-indent`、`--lg-*` 都挂在 `body` 上，靠后面的段落覆盖前面的，顺序变了结果就变。
 - 个人层的 `!important` 用于压过 Blue Topaz 的同名属性，删掉会退回主题默认样式。
 
