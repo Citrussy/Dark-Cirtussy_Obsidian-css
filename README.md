@@ -8,6 +8,8 @@ The override layer started as eight CSS snippets in `.obsidian/snippets/`. Snipp
 
 What changes: italics render upright in the H6 green, escape characters keep the body color, tags become pills, the active line loses its highlight, list bullets use six colors, checkboxes are 16px, completed tasks are dimmed, headings follow a six-color ladder (H1 at 2.13em, −0.21em per level, note title at 2.34em), lists indent 1.65em with purple guide lines, callouts are tinted 10% with the callout color, block formulas scroll horizontally instead of overflowing, and code blocks get a macOS title bar with GitHub Dark syntax colors.
 
+Blue Topaz is MIT licensed, Copyright (c) 2020 WhyI & Pkmer.
+
 Requires Obsidian 1.13 or newer. Dark mode only; the palette is tuned for the dark scheme.
 
 ![Dark Citrussy](screenshot.png)
