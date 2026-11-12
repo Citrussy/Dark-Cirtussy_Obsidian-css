@@ -57,7 +57,7 @@ Requires Obsidian 1.13 or newer. Dark mode only; the palette is tuned for the da
 
 ## 常用变量
 
-行号对应 1.0.3。
+行号对应 1.0.4。
 
 | 目标 | 行 | 变量或规则 |
 | --- | --- | --- |
@@ -100,9 +100,9 @@ Obsidian 里 `Ctrl+P` → `Reload app without saving`。直接改 `theme.css` �
 
 ## 安装
 
-从 [Releases](https://github.com/Citrussy/my-obsidian-setup/releases/latest) 下载 `theme.css` 和 `manifest.json`，放进 `.obsidian/themes/Dark Citrussy/`，在「设置 → 外观 → 主题」里选中。
+已上架社区主题库：[community.obsidian.md/themes/dark-citrussy](https://community.obsidian.md/themes/dark-citrussy)。
 
-尚未提交到社区主题库，暂时只能手动安装。
+在 Obsidian 里打开「设置 → 外观 → 管理主题 → 浏览」，搜 **Dark Citrussy**，安装并选用。离线安装：从 [Releases](https://github.com/Citrussy/my-obsidian-setup/releases/latest) 下载 `theme.css` 和 `manifest.json`，放进 `.obsidian/themes/Dark Citrussy/`。
 
 ## 许可
 
