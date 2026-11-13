@@ -31946,3 +31946,81 @@ body .markdown-source-view.mod-cm6 .cm-line.HyperMD-codeblock .cm-link {
 body .markdown-source-view.mod-cm6 .cm-line.HyperMD-codeblock .cm-error {
     color: var(--vc-invalid) !important;
 }
+
+/* ============================================================
+   Mobile · 抵消 iPhone 暖白点 + 压深（P3 / OLED / 原彩）
+   ------------------------------------------------------------
+   只在手机和平板上生效：Obsidian 给移动端 body 加 .is-mobile，
+   电脑端没有这个类，下面每条规则对桌面零影响。
+
+   一、推冷。屏幕白点偏暖时，中性灰会被推成暖灰，浅灰文字发奶油黄。
+   CSS 改不了面板，只能反向推冷内容：线性光 R×0.958、B×1.086
+   （约 -500K），让同一串数值在手机上落回电脑 sRGB 的观感。
+
+   二、压深。手机屏亮度高，深灰会被抬成中灰：黑底发灰、彩色发浅。
+   移动端把整条中性色阶在编码空间压 gamma 1.25：
+   底色 #202020 → #121314，正文 #c6c6c6 → #b6bac1，
+   前后对比度 9.5:1，和桌面持平。标题、代码色压 gamma 1.15。
+
+   手机端仍偏浅 → 调大 gamma；偏黑过头 → 调小。只动这两处。
+   ============================================================ */
+
+body.is-mobile.theme-dark {
+    /* 底色；-bg-4-bt 一并给，搜索面板等派生变量直接引用它 */
+    --background-primary-bg-4-bt: #121314;
+    --background-secondary-bg-4-bt: #0b0b0c;
+    --background-primary-alt-bg-4-bt: #303133;
+    --background-secondary-alt-bg-4-bt: #141516;
+
+    --background-primary: #121314;
+    --background-primary-alt: #303133;
+    --background-secondary: #0b0b0c;
+    --background-secondary-alt: #141516;
+    --background-modifier-border: #222325;
+    --background-modifier-border-hr: #2b2c2e;
+    --background-modifier-border-checkbox: #64676b;
+    --background-mobile-drawer-1: #0f0f10;
+    --background-mobile-drawer-2: #0f0f1069;
+    --interactive-normal: #1b1c1d;
+    --interactive-hover: #252527;
+    --scrollbar-thumb-bg: #2b2c2e7e;
+    --scrollbar-active-thumb-bg: #38393c88;
+    --table-border-color: #353639;
+
+    /* 文字 */
+    --text-normal: #b6bac1;
+    --text-muted: #74767b;
+    --text-muted-rgb: 116, 118, 123;
+    --text-faint: #626468;
+    --text-folder-file: #a1a4aa;
+    --accent-strong: #dde1ea;
+    --text-on-accent: #dadee6;
+    --search-text: #d5d9e1;
+    --code-normal: #c2c6cd;
+    --graph-text-color: #a3a6ac;
+    --tag-text: #dadee6;
+
+    /* 有彩色：手机上也压一档，不然在深底上还是发浅 */
+    --h1-color: #8bba24;
+    --h2-color: #3fa83c;
+    --h3-color: #2eb2b2;
+    --h4-color: #6897e2;
+    --h5-color: #a98bf1;
+    --h6-color: #e79bf7;
+    --text-color-code: #cf7300;
+    --list-ul-disc-color: #e88956;
+    --list-ul-block-color: #dd8c36a9;
+    --list-ol-block-color: #1d79b2b4;
+}
+
+/* iOS 的毛玻璃带 vibrancy，半透明面板上会再叠一层饱和；
+   去掉后，手机端只剩上面校准过的底色。 */
+body.is-mobile .workspace-leaf-content,
+body.is-mobile .modal,
+body.is-mobile .menu,
+body.is-mobile .prompt,
+body.is-mobile .suggestion-container,
+body.is-mobile .view-header {
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+}
